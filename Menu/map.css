@@ -1,0 +1,42 @@
+html {
+  height: 100%
+}
+body {
+  height: 100%;
+  margin: 0;
+  padding: 1em;
+}
+#map{
+  height: 100%;
+  width:75%;
+  float:left;
+  margin-right:2em;
+}
+#list{
+  float:left;
+}
+ul {
+  margin: 0.75em 0;
+  padding: 0 1em;
+  list-style: none;
+}
+li.city:before {
+  content: "";
+  border-color: transparent #111 ;
+  border-style: solid;
+  border-width: 0.35em 0 0.35em 0.45em;
+  display: block;
+  height: 0;
+  width: 0;
+  left: -1em;
+  top: 0.9em;
+  position: relative;
+}
+li:not(.city){
+  list-style: initial;
+  padding:0.4em;
+}
+li.open:before{
+  border-color: #111 transparent;
+  border-width: 0.45em 0.35em 0 0.45em;
+}
