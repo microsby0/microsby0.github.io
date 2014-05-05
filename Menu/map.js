@@ -13,7 +13,7 @@ $(document).ready(function () {
 
     $('ul:not(#main)').hide();
     $('li.city').click(function () {
-        $(this).children().slideToggle();
+        $(this).children(":not(span)").slideToggle();
         $(this).toggleClass("open");
     });
 
@@ -77,8 +77,9 @@ $(document).ready(function () {
 
     });
 
-    $(".city").each(function (index, value) {
-        console.log("Here: " + $(this).text().split("\n")[0]);
-        $(this).innerHTML += $(this).children.length;
+    $(".city span").each(function (index, value) {
+        $(this).text($(this).text() + " - " + $(this).parent().children().children().length);
+        console.log("Here: " + $(this).parent().children().children().length);
+        //$(this).html() = 5;
     });
 });
