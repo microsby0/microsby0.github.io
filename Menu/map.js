@@ -1,10 +1,14 @@
 $(document).ready(function () {
-    var delay = 100;
+    var delay = 0;
     var addresses = [];
 
     var infowindow = new google.maps.InfoWindow();
     var geo = new google.maps.Geocoder();
-    var map = new google.maps.Map(document.getElementById("map"));
+    var mapOptions = {
+        zoom: 4,
+        center: google.maps.LatLng(34.363882,84.344922)
+    };
+    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
     var bounds = new google.maps.LatLngBounds();
 
     $('ul:not(#main)').hide();
@@ -14,20 +18,17 @@ $(document).ready(function () {
     });
 
     function getAddress(search, next) {
-        console.log("In method");
         geo.geocode({
             address: search
         }, function (results, status) {
-            console.log("In thing");
             if (status == google.maps.GeocoderStatus.OK) {
-                console.log("In if");
                 var p = results[0].geometry.location;
                 var lat = p.lat();
                 var lng = p.lng();
                 var msg = 'address="' + search + '" lat=' + lat + ' lng=' + lng + '(delay=' + delay + 'ms)<br>';
+                console.log(msg);
                 createMarker(search, lat, lng);
             } else {
-                console.log("In else");
                 if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
                     nextAddress--;
                     delay++;
@@ -37,8 +38,6 @@ $(document).ready(function () {
                     console.log(errmsg);
                 }
             }
-            console.log("out method");
-
             next();
         });
     }
@@ -60,15 +59,24 @@ $(document).ready(function () {
 
     function theNext() {
         if (nextAddress < addresses.length) {
-            setTimeout(getAddress("'" + addresses[nextAddress] + "'", theNext), delay);
+            setTimeout(function(){getAddress(addresses[nextAddress], theNext);}, delay);
             nextAddress++;
+            delay+=100;
         } else {
-            console.log("done");
+	addresses = ['Unknown','Statesboro, GA','Seattle, WA','Sandy Springs, GA','Pine Mountain, GA','Panama City Beach, FL','Ormond Beach, FL','Orlando, FL','New York City, NY','New Orleans, LA','Misc.','Jerusalem, Israel','Hot Springs, NC','Gulf Shores, AL','Gainesville, FL','Dunwoody, GA','Cambridge, MA','Brooklyn, NY','Atlanta, GA','Athens, GA','Alpharetta, GA'];
             map.fitBounds(bounds);
+            $("#loading_gif").fadeOut('slow', function() {
+                $("#loading_gif").attr('display', 'none');
+            });
         }
     }
     addresses = ['Statesboro, GA', 'Seattle, WA', 'Sandy Springs, GA', 'Pine Mountain, GA', 'Panama City Beach, FL', 'Ormond Beach, FL', 'Orlando, FL', 'New York City, NY', 'New Orleans, LA', 'Jerusalem, Israel', 'Hot Springs, NC', 'Gulf Shores, AL', 'Gainesville, FL', 'Dunwoody, GA', 'Cambridge, MA', 'Brooklyn, NY', 'Atlanta, GA', 'Athens, GA', 'Alpharetta, GA', 'Airplane'];
-    theNext();
+    google.maps.event.addListenerOnce(map, 'idle', function(){
+        console.log("ready");
+        theNext();
+
+    });
+
     $(".city").each(function (index, value) {
         console.log("Here: " + $(this).text().split("\n")[0]);
         $(this).innerHTML += $(this).children.length;

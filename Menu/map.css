@@ -40,3 +40,10 @@ li.open:before{
   border-color: #111 transparent;
   border-width: 0.45em 0.35em 0 0.45em;
 }
+#loading_gif{
+  position: absolute;
+  z-index:2;
+  height: 100%;
+  width:72%;
+  float:left;
+}
