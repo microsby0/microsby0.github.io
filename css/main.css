@@ -353,7 +353,8 @@ th {
   padding: 0; }
 
 body {
-  background-color: #c7c7c7; }
+  background-color: #f5f3f3;
+  padding: 0.7em; }
   @media only screen and (max-width: 30em) {
     body {
       font-size: 90%; } }
@@ -364,5 +365,14 @@ body {
     body {
       font-size: 110%; } }
 
-h1 {
+header {
+  font-size: 2em;
   text-align: center; }
+
+nav {
+  width: 30em;
+  margin: 0.6em auto; }
+  nav a {
+    font-size: 1.3em;
+    text-decoration: none;
+    color: black; }
