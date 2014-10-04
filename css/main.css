@@ -1,3 +1,4 @@
+@import url(style.css);
 /* normalize.css v3.0.0 | MIT License | git.io/normalize */
 /**
  * 1. Set default font family to sans-serif.
@@ -353,8 +354,7 @@ th {
   padding: 0; }
 
 body {
-  background-color: #f5f3f3;
-  padding: 0.7em; }
+  background-color: black; }
   @media only screen and (max-width: 30em) {
     body {
       font-size: 90%; } }
@@ -376,3 +376,7 @@ nav {
     font-size: 1.3em;
     text-decoration: none;
     color: black; }
+
+audio {
+  display: block;
+  margin: 0 auto; }
