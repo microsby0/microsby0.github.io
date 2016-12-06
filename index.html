@@ -2,22 +2,21 @@
 <html>
   <body>
     <SCRIPT>
-      function passWord() {
-          var testV = 1;
-          var pass1 = prompt('Please Enter Your Password', ' ');
-          while (testV < 3) {
-              if (!pass1)
+      function password() {
+          var attempt = 1;
+          var guess = prompt('Please Enter Your Password', ' ');
+          while (attempt < 3) {
+              if (!guess)
                   history.go(-1);
-              if (pass1.toLowerCase() == "letmein") {
+              if (guess.toLowerCase() == "present") {
                   alert('You Got it Right!');
-                  window.open('protectpage.html');
+                  window.open('project.html');
                   break;
               }
-              testV += 1;
-              var pass1 =
-                  prompt('Access Denied - Password Incorrect, Please Try Again.', 'Password');
+              attempt += 1;
+              var guess = prompt('Access Denied - Password Incorrect, Please Try Again.', 'Password');
           }
-          if (pass1.toLowerCase() != "password" & testV == 3)
+          if (guess.toLowerCase() != "password" & attempt == 3)
               history.go(-1);
           return " ";
       }
